@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- This line automatically redirects the user instantly -->
+  <meta http-equiv="refresh" content="0; url=YOUR_DRIVE_LINK_HERE" />
+  <title>Opening Google Drive...</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin-top: 50px; color: #666; }
+  </style>
+</head>
+<body>
+  <p>Taking you to Google Drive...</p>
+  <p><a href="https://aiubedu60714-my.sharepoint.com/:f:/g/personal/rahmansezad_ice_aiub_edu/IgDIzS0RMWuxRLsdyOcYtuw-AdDidWseZnHMvVBZQkQ_0hQ?e=T68wmz">Click here if you are not redirected automatically</a></p>
+</body>
+</html>
