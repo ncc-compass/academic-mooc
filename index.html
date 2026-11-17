@@ -8,23 +8,25 @@
 
   <style>
     :root {
-      /* Updated to a more standard academic blue for NCC, change if needed */
-      --brand-primary: #0f4c81; 
-      --brand-hover: #0a365c;
-      --brand-dark: #1a1a24;
-      --bg-main: #f4f5f7;
+      --ielts-red: #c8102e;
+      --ielts-red-hover: #a00c24;
+      --ielts-dark: #222222;
+      --ielts-bg: #f4f5f7;
       --card-bg: #ffffff;
       --text-main: #1f2937;
       --text-muted: #6b7280;
       --border-color: #e5e7eb;
-      --focus-blue: #2563eb;
-      --folder-bg: #f8fafc;
+      --focus-blue: #1d4ed8;
+      --tag-bg: #eff6ff;
+      --tag-text: #1d4ed8;
+      --lesson-tag-bg: #fef3c7;
+      --lesson-tag-text: #92400e;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: Arial, Helvetica, sans-serif;
-      background-color: var(--bg-main);
+      background-color: var(--ielts-bg);
       color: var(--text-main);
       min-height: 100vh;
       display: flex;
@@ -33,7 +35,7 @@
 
     /* HEADER */
     header {
-      background-color: var(--brand-dark);
+      background-color: var(--ielts-dark);
       color: #fff;
       padding: 14px 28px;
       display: flex;
@@ -60,7 +62,7 @@
       letter-spacing: 0.5px;
     }
     .brand-badge {
-      background: var(--brand-primary);
+      background: var(--ielts-red);
       color: #fff;
       font-size: 11px;
       padding: 2px 8px;
@@ -79,11 +81,11 @@
       flex: 1;
     }
 
-    .toolbar {
+    .subnav-toolbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       gap: 16px;
       flex-wrap: wrap;
       background: #fff;
@@ -92,37 +94,39 @@
       border: 1px solid var(--border-color);
     }
 
-    /* BREADCRUMBS */
+    /* BREADCRUMBS (Replaces old category switcher) */
     .breadcrumbs {
       display: flex;
       flex-wrap: wrap;
+      background: var(--ielts-bg);
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
       gap: 8px;
       align-items: center;
-      font-size: 15px;
+      font-size: 13px;
       font-weight: bold;
-      color: var(--text-muted);
     }
     .breadcrumb-item {
       cursor: pointer;
-      color: var(--brand-primary);
-      transition: color 0.15s;
+      color: var(--focus-blue);
+      text-decoration: none;
+      transition: color 0.15s ease;
     }
     .breadcrumb-item:hover {
-      color: var(--brand-hover);
       text-decoration: underline;
     }
     .breadcrumb-separator {
-      color: #9ca3af;
+      color: var(--text-muted);
       font-size: 12px;
     }
     .breadcrumb-current {
       color: var(--text-main);
     }
 
-    /* SEARCH BOX */
     .search-box {
       flex: 1;
-      max-width: 320px;
+      max-width: 380px;
     }
     .search-box input {
       width: 100%;
@@ -135,66 +139,72 @@
     }
     .search-box input:focus {
       border-color: var(--focus-blue);
-      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+      box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.15);
+    }
+
+    .meta-counts {
+      font-size: 14px;
+      color: var(--text-main);
+      font-weight: bold;
+      text-align: right;
     }
 
     /* MODULE GRID */
     .module-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
     }
 
     .module-card {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      padding: 20px;
+      padding: 22px;
       display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      text-decoration: none;
-      color: inherit;
+      flex-direction: column;
+      text-decoration: none; 
+      color: inherit; 
       cursor: pointer;
-      transition: transform 0.1s, box-shadow 0.1s, border-color 0.1s;
-    }
-    .module-card.folder-card {
-      background: var(--folder-bg);
+      transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
     }
     .module-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.06);
       border-color: #cbd5e1;
     }
 
-    .card-icon {
-      font-size: 24px;
-      line-height: 1;
-    }
-
-    .card-content {
+    .card-meta {
       display: flex;
-      flex-direction: column;
-      gap: 4px;
-      overflow: hidden;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .module-tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      font-size: 11px;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .module-tag.lesson {
+      background: var(--lesson-tag-bg);
+      color: var(--lesson-tag-text);
+    }
+    .module-tag.pdf {
+      background: #fce7f3;
+      color: #be185d;
     }
 
     .module-title {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: bold;
-      color: var(--brand-dark);
-      line-height: 1.3;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .module-subtitle {
-      font-size: 12px;
-      color: var(--text-muted);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      color: var(--ielts-dark);
+      margin-bottom: 4px;
+      line-height: 1.4;
     }
 
     /* STATUS & SPINNER */
@@ -245,21 +255,24 @@
   </header>
 
   <div class="container">
-    
-    <div class="toolbar">
+    <!-- SUBNAV & FILTER TOOLBAR -->
+    <div class="subnav-toolbar">
+      
       <div class="breadcrumbs" id="breadcrumbs">
         <!-- Breadcrumbs injected via JS -->
       </div>
 
       <div class="search-box">
-        <input type="text" id="filter-input" placeholder="Search across all files..." oninput="renderView()">
+        <input type="text" id="filter-input" placeholder="Search across all folders..." oninput="renderView()">
       </div>
+
+      <div class="meta-counts" id="module-count">Scanning workspace...</div>
     </div>
 
     <!-- SPINNER -->
     <div id="status-container" class="status-state">
       <div class="spinner"></div>
-      Loading repository workspace...
+      Loading repository files...
     </div>
 
     <!-- CARD GRID -->
@@ -273,11 +286,11 @@
   <script>
     // --- CONFIGURATION ---
     const REPO_OWNER = 'ncc-compass';
-    const REPO_NAME = 'ielts'; // Change this if you created a new repo for NCC
+    const REPO_NAME = 'academic--mooc'; // Updated repository name
     const BRANCH = 'main'; // Adjust to 'master' if needed
 
     // --- STATE ---
-    let allRepoItems = []; // Stores the raw repository tree
+    let allRepoItems = []; 
     let currentPath = '';  // '' means the root directory
 
     // --- CORE API FETCH ---
@@ -294,11 +307,11 @@
         const data = await response.json();
         if (!data.tree) throw new Error('Bad structure');
 
-        // Filter out irrelevant root files like the index, css, git files, etc.
+        // Filter out irrelevant root files like the index, 404, or github hidden files
         allRepoItems = data.tree.filter(item => {
           const pathLower = item.path.toLowerCase();
           if (pathLower === 'index.html' || pathLower === '404.html' || pathLower.startsWith('.')) return false;
-          return true; // Keep everything else (folders and files)
+          return true; 
         });
 
         document.getElementById('status-container').style.display = 'none';
@@ -309,40 +322,34 @@
       } catch (e) {
         console.warn('GitHub API fetch failed:', e.message);
         document.getElementById('status-container').innerHTML = `
-          <div style="color:#c8102e; font-weight:bold;">Error loading workspace. Check repository settings or rate limits.</div>
+          <div style="color:var(--ielts-red)">Error loading files. Check repository settings or rate limits.</div>
         `;
       }
     }
 
     // --- UTILITIES ---
-    // Cleans filenames for display (removes extensions, replaces underscores with spaces)
     function cleanTitle(filename) {
       return filename
-        .replace(/\.[^/.]+$/, "") // Regex to strip file extension
+        .replace(/\.[^/.]+$/, "") // Remove file extension
         .replace(/_/g, ' ');      // Replace underscores with spaces
     }
 
-    // Extracts the immediate children (folders and files) inside a specific directory path
     function getImmediateChildren(targetPath) {
       const prefix = targetPath ? targetPath + '/' : '';
       const childrenMap = new Map();
 
       allRepoItems.forEach(item => {
         if (item.path.startsWith(prefix)) {
-          // Get the rest of the path after the current folder
           const remainingPath = item.path.substring(prefix.length);
           const slashIndex = remainingPath.indexOf('/');
 
           if (slashIndex === -1) {
-            // No more slashes = it's an immediate file or folder
             childrenMap.set(item.path, {
               path: item.path,
               name: remainingPath,
               type: item.type === 'tree' ? 'folder' : 'file'
             });
           } else {
-            // There are slashes = it's a file deep inside a subfolder.
-            // We ensure the immediate subfolder is listed.
             const folderName = remainingPath.substring(0, slashIndex);
             const folderPath = prefix + folderName;
             if (!childrenMap.has(folderPath)) {
@@ -355,7 +362,6 @@
           }
         }
       });
-
       return Array.from(childrenMap.values());
     }
 
@@ -373,7 +379,6 @@
         html += `<span class="breadcrumb-separator">/</span>`;
         
         if (index === parts.length - 1) {
-          // Last item is not clickable
           html += `<span class="breadcrumb-current">${cleanTitle(part)}</span>`;
         } else {
           html += `<span class="breadcrumb-item" data-target="${accumulativePath}">${cleanTitle(part)}</span>`;
@@ -386,12 +391,12 @@
     function renderView() {
       const searchQuery = document.getElementById('filter-input').value.toLowerCase().trim();
       const grid = document.getElementById('module-grid');
+      const countEl = document.getElementById('module-count');
       grid.innerHTML = '';
 
       let displayItems = [];
 
       if (searchQuery) {
-        // GLOBAL SEARCH MODE: Search all files (blobs) across the repo
         document.getElementById('breadcrumbs').innerHTML = `<span class="breadcrumb-current">🔍 Search Results</span>`;
         
         displayItems = allRepoItems
@@ -404,56 +409,60 @@
           }))
           .filter(item => cleanTitle(item.name).toLowerCase().includes(searchQuery));
       } else {
-        // FOLDER EXPLORER MODE
         renderBreadcrumbs();
         displayItems = getImmediateChildren(currentPath);
       }
 
-      // Sort: Folders first, then alphabetically
       displayItems.sort((a, b) => {
         if (a.type !== b.type) return a.type === 'folder' ? -1 : 1;
         return a.name.localeCompare(b.name);
       });
 
+      countEl.textContent = `${displayItems.length} Item${displayItems.length === 1 ? '' : 's'}`;
+
       if (displayItems.length === 0) {
         grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; color: #6b7280; padding: 50px 0;">
-          No files or folders found here.
+          No materials found here.
         </div>`;
         return;
       }
 
-      // Render Cards
       displayItems.forEach(item => {
         const card = document.createElement('a');
-        card.className = item.type === 'folder' ? 'module-card folder-card' : 'module-card';
+        card.className = 'module-card';
         
         if (item.type === 'folder') {
-          // Folders trigger navigation logic
+          // FOLDER STYLING (Uses the default blue tag from your original CSS)
           card.href = "#";
           card.setAttribute('data-folder-path', item.path);
+          card.classList.add('folder-card');
+          
           card.innerHTML = `
-            <div class="card-icon">📁</div>
-            <div class="card-content">
-              <div class="module-title">${cleanTitle(item.name)}</div>
-              <div class="module-subtitle">Folder</div>
+            <div class="card-meta">
+              <span class="module-tag">Folder</span>
             </div>
+            <div class="module-title">📁 ${cleanTitle(item.name)}</div>
           `;
         } else {
-          // Files open directly in a new tab
+          // FILE STYLING
           const basePath = window.location.href.split('?')[0].replace(/\/index\.html$/, '').replace(/\/$/, '');
           card.href = `${basePath}/${encodeURI(item.path)}`;
           card.target = '_blank';
           card.rel = 'noopener';
           
-          let subtitleText = 'Document';
-          if (searchQuery) subtitleText = `In: ${cleanTitle(item.parentPath)}`; // Show location in search results
-          
+          const isPdf = item.name.toLowerCase().endsWith('.pdf');
+          let tagClass = isPdf ? 'pdf' : 'lesson';
+          let tagText = isPdf ? 'PDF Document' : 'Resource';
+
+          if (searchQuery) {
+            tagText = `In: ${cleanTitle(item.parentPath)}`;
+          }
+
           card.innerHTML = `
-            <div class="card-icon">📄</div>
-            <div class="card-content">
-              <div class="module-title">${cleanTitle(item.name)}</div>
-              <div class="module-subtitle">${subtitleText}</div>
+            <div class="card-meta">
+              <span class="module-tag ${tagClass}">${tagText}</span>
             </div>
+            <div class="module-title">${cleanTitle(item.name)}</div>
           `;
         }
 
@@ -462,18 +471,16 @@
     }
 
     // --- EVENT LISTENERS ---
-    // Handle clicks on Folder Cards (Event Delegation)
     document.getElementById('module-grid').addEventListener('click', (e) => {
       const folderCard = e.target.closest('.folder-card');
       if (folderCard) {
-        e.preventDefault(); // Prevent page scroll jump
+        e.preventDefault(); 
         currentPath = folderCard.getAttribute('data-folder-path');
-        document.getElementById('filter-input').value = ''; // Clear search when diving into folder
+        document.getElementById('filter-input').value = ''; 
         renderView();
       }
     });
 
-    // Handle clicks on Breadcrumbs (Event Delegation)
     document.getElementById('breadcrumbs').addEventListener('click', (e) => {
       const breadcrumb = e.target.closest('.breadcrumb-item');
       if (breadcrumb) {
@@ -483,7 +490,7 @@
       }
     });
 
-    // Start App
+    // Initialize
     fetchRepoContents();
   </script>
 </body>
